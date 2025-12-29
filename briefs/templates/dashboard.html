@@ -1,0 +1,23 @@
+<h2>Daily Brief</h2>
+
+<h3>All Updates</h3>
+<table border="1">
+<tr><th>Name</th><th>Dept</th><th>Tasks</th><th>Challenges</th><th>Suggestions</th><th>Ideas</th></tr>
+{% for b in briefs %}
+<tr>
+<td>{{ b.name }}</td>
+<td>{{ b.department }}</td>
+<td>{{ b.tasks }}</td>
+<td>{{ b.challenges }}</td>
+<td>{{ b.suggestions }}</td>
+<td>{{ b.ideas }}</td>
+</tr>
+{% endfor %}
+</table>
+
+<h3>Top Challenges</h3>
+<ul>
+{% for c in challenges %}
+<li>{{ c.challenges }} ({{ c.total }})</li>
+{% endfor %}
+</ul>
