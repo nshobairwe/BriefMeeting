@@ -1,23 +1,91 @@
-<h2>Daily Brief</h2>
+{% extends "base.html" %}
 
-<h3>All Updates</h3>
+{% block content %}
+<div class="nav">
+        <a href="{% url 'submit' %}">Staff inputs</a> |
+        <a href="{% url 'submit_aob' %}">Staff AOB</a> |
+
+    </div>
+    
+<form method="get" action="{% url 'generate_report' %}">
+    <button type="submit">Generate Report (PDF)</button>
+</form>
+<br>
+
+<h3>Meeting Details</h3>
 <table border="1">
-<tr><th>Name</th><th>Dept</th><th>Tasks</th><th>Challenges</th><th>Suggestions</th><th>Ideas</th></tr>
+<tr>
+    <th>Meeting Name</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Venue</th>
+    <th>Purpose</th>
+</tr>
+{% for m in meetings %}
+<tr>
+    <td>{{ m.meeting_name }}</td>
+    <td>{{ m.start_date }}</td>
+    <td>{{ m.end_date }}</td>
+    <td>{{ m.venue }}</td>
+    <td>{{ m.purpose }}</td>
+</tr>
+{% endfor %}
+</table>
+<br><br>
+
+<h3>Attendance</h3>
+<table border="1">
+<tr><th>Attendance's name</th><th>Designation</th></tr>
+{% for at in attendance %}
+<tr>
+<td>{{ at.name }}</td>
+<td>{{ at.designation }}</td>
+</tr>
+{% endfor %}
+</table>
+<br>
+<br>
+<h3>Agenda</h3>
+<table border="1">
+<tr><th>Agenda Item</th><th>Owner</th></tr>
+{% for ag in agendas %}
+<tr>
+<td>{{ ag.Agender_item  }}</td>
+<td>{{ ag.owner }}</td>
+</tr>
+{% endfor %}
+</table>
+<br>
+<br>
+
+<h3>Takeways</h3>
+<table border="1">
+<tr><th>Name</th> <th>action_item </th>
+<th>status</th>    <th>additional_info</th>
 {% for b in briefs %}
 <tr>
 <td>{{ b.name }}</td>
-<td>{{ b.department }}</td>
-<td>{{ b.tasks }}</td>
-<td>{{ b.challenges }}</td>
-<td>{{ b.suggestions }}</td>
-<td>{{ b.ideas }}</td>
+<td>{{ b.action_item  }}</td>
+<td>{{ b.status }}</td>
+<td>{{ b.additional_info }}</td>
 </tr>
 {% endfor %}
 </table>
 
-<h3>Top Challenges</h3>
-<ul>
-{% for c in challenges %}
-<li>{{ c.challenges }} ({{ c.total }})</li>
+<br>
+<br>
+<h3>AOB</h3>
+<table border="1">
+<tr><th>action_item </th> <th>Assigned To</th>
+<th>status</th>    <th>additional_info</th>
+{% for a in aob %}
+<tr>
+
+<td>{{ a.action_item  }}</td>
+<td>{{ a.assigned_to }}</td>
+<td>{{ a.status }}</td>
+<td>{{ a.additional_info }}</td>
+</tr>
 {% endfor %}
-</ul>
+</table>
+{% endblock %}

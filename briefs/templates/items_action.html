@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="nav">
+        <a href="{% url 'dashboard' %}">Dashboard</a> |
+        <a href="{% url 'submit_aob' %}">Staff AOB</a> |
+    </div>
+
+<h2>Add Brief Action Item</h2>
+
+<form method="post">{% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Submit</button>
+</form>
+{% endblock %}

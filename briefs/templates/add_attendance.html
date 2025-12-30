@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>In Attendance as attached</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>Add</button>
+</form>
+
+<h3>Current Attendees</h3>
+<ul>
+{% for a in attendees %}
+    <li>{{ a.name }} – {{ a.designation }}</li>
+{% endfor %}
+</ul>
+
+<a href="/dashboard/">Finish</a>
+{% endblock %}

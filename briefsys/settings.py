@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,8 +27,11 @@ SECRET_KEY = 'django-insecure-faxnc#2q@=8slfb8g-lln^b@%bb)v*a*)0+62l@+8of75-m5wo
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = ["https://*.onrender.com"]
+
+
+LOGIN_URL = "/login/"
+LOGIN_REDIRECT_URL = "/submit/"
+
 
 # Application definition
 
@@ -76,7 +81,10 @@ WSGI_APPLICATION = 'briefsys.wsgi.application'
 
 
 DATABASES = {
-    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 
@@ -121,3 +129,8 @@ STATICFILES_DIRS = [ BASE_DIR / "static" ]
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# intenal    postgresql://briefsys_db_user:MeptdjZU2QMYH0xCCvpyuUAj5YyVNiTg@dpg-d5966sqli9vc73aeg7m0-a/briefsys_db
+
+#  extenal postgresql://briefsys_db_user:MeptdjZU2QMYH0xCCvpyuUAj5YyVNiTg@dpg-d5966sqli9vc73aeg7m0-a.oregon-postgres.render.com/briefsys_db
